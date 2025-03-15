@@ -11,7 +11,7 @@ Feature: Login Feature
     And The user clicks on the Login button
     Then A user successfully gets login
 
-     Scenario: Failed Login-2
+    Scenario: Failed Login-2
 
     Given A user lands on the Login page
     When  A user enters the username "locked_out_user"
@@ -19,6 +19,7 @@ Feature: Login Feature
     And The user clicks on the Login button
     Then A user is failed to login & error message is displayed
 
+Feature: Add to cart Feature
 
     Scenario: Adding SauceLabs Backpack to cart-3
 
