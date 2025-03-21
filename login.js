@@ -1,5 +1,5 @@
 import { Given, When, defineStep, Then } from "@badeball/cypress-cucumber-preprocessor";
-const homeSaucePage = require('../features/homeSauce')
+const homeSaucePage = require('../cypress/e2e/features/homeSauce')
 
 
 Given('A user lands on the Login page',() =>{
@@ -8,11 +8,13 @@ Given('A user lands on the Login page',() =>{
 
 When('A user enters the username {string}',(username)=>{
     //cy.get('#user-name').type(username)
+    console.log("Received username:", username);
     homeSaucePage.typeUsername(username)
 });
 
 defineStep('A user enters the password {string}',(passO)=> {
     //cy.get('#password').type(passO)
+    console.log("Received password:", password);
     homeSaucePage.typePassword(passO)
 });
 
@@ -29,6 +31,13 @@ Then('A user is failed to login & error message is displayed',()=>{
    // cy.get('h3').should('contain','Epic sadface: Sorry, this user has been locked out.')
    homeSaucePage.elements.errorMessage().should('contain','Epic sadface: Sorry, this user has been locked out.')    
 })
+
+
+Then('A user is failed to login due to invalid username or password & error message is displayed',()=>{
+    // cy.get('h3').should('contain','Epic sadface: Sorry, this user has been locked out.')
+    homeSaucePage.elements.errorMessage().should('contain','Epic sadface: Username and password do not match any user in this service')    
+})
+
 
 //-3
 Given('A user is on the Product page',()=>{
@@ -52,3 +61,8 @@ Then('A user is back on the Product page where Backpack Product has remove optio
     cy.get('#back-to-products').click()
     cy.get('#remove-sauce-labs-backpack').should('contain','Remove')
 })
+
+
+Then('I print {string}', (message) => {
+    console.log("DEBUG:", message);
+  });
